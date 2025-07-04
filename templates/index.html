@@ -27,9 +27,12 @@
     {% if doc %}
         <div class="info">
             <p><strong>编号 (number):</strong> {{ doc.label }} {{ doc.number }}</p>
-            <p><strong>旧描述:</strong> {{ doc.description }}</p>
+            <p><strong>旧描述:</strong> {{ doc.note }}</p>
             <p><strong>上传人 (QA):</strong> {{ doc.user }}</p>
             <p><strong>图片数量:</strong> {{ doc.image_count }}</p>
+            {% if doc.location %}
+                <p><strong>位置:</strong> {{ doc.location }}</p>
+            {% endif %}
             {% if doc.url and doc.url != '（未填写）' %}
                 <p><strong>商品链接 (URL):</strong> <a href="{{ doc.url }}" target="_blank">{{ doc.url }}</a></p>
             {% endif %}
