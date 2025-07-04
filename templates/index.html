@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>录货系统</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .info { margin-bottom: 20px; }
+        img { max-width: 300px; margin: 10px 0; }
+        textarea { width: 400px; height: 100px; }
+        input[type="text"] { width: 400px; }
+        .actions { margin-top: 20px; }
+        .skip-count { color: gray; font-size: 0.9rem; margin-bottom: 15px; }
+        .top-bar { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <p>当前管理员：<strong>{{ admin }}</strong> ｜ <a href="/logout">🚪 退出</a></p>
+    </div>
+
+
+    <h2>📦 录货系统</h2>
+
+    <div class="skip-count">已跳过数量：{{ skipped_count }}</div>
+
+    {% if doc %}
+        <div class="info">
+            <p><strong>编号 (number):</strong> {{ doc.label }} {{ doc.number }}</p>
+            <p><strong>旧描述:</strong> {{ doc.description }}</p>
+            <p><strong>上传人 (QA):</strong> {{ doc.user }}</p>
+            <p><strong>图片数量:</strong> {{ doc.image_count }}</p>
+            {% if doc.url and doc.url != '（未填写）' %}
+                <p><strong>商品链接 (URL):</strong> <a href="{{ doc.url }}" target="_blank">{{ doc.url }}</a></p>
+            {% endif %}
+            {% if doc.jump_url %}
+                <p><strong>Discord 链接:</strong> <a href="{{ doc.jump_url }}" target="_blank">{{ doc.jump_url }}</a></p>
+    {% endif %}
+
+        <form method="post" action="/submit">
+            <input type="hidden" name="doc_id" value="{{ doc._id }}">
+            <label><strong>Title：</strong></label><br>
+            <input type="text" name="title" required><br><br>
+
+            <label><strong>新描述：</strong></label><br>
+            <textarea name="description" required></textarea><br><br>
+
+            <div class="actions">
+                <button type="submit">✅ 提交</button>
+            </div>
+        </form>
+
+        <form method="post" action="/skip" style="margin-top: 10px;">
+            <input type="hidden" name="doc_id" value="{{ doc._id }}">
+            <button type="submit">⏭️ 跳过此条</button>
+        </form>
+    {% else %}
+        <h3>🎉 没有更多待录入的数据了</h3>
+    {% endif %}
+</body>
+</html>
