@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f2f6fa;
+    color: #333;
+}
+
+a {
+    color: #1e88e5;
+}
+
+.top-bar {
+    margin-bottom: 20px;
+}
+
+.dataset-switch a {
+    margin-right: 8px;
+    text-decoration: none;
+    color: #1e88e5;
+}
+
+.dataset-switch a.active {
+    font-weight: bold;
+}
+
+.info {
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 400px;
+    height: 100px;
+}
+
+input[type="text"] {
+    width: 400px;
+}
+
+.actions {
+    margin-top: 20px;
+}
+
+.skip-count {
+    color: gray;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.record-list li {
+    margin-bottom: 5px;
+}
+
+.search-form {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

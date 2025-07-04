@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>编辑记录</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="top-bar">
+        <p>当前管理员：<strong>{{ admin }}</strong> ｜ <a href="/logout">🚪 退出</a></p>
+        <a href="{{ url_for('records') }}">返回列表</a>
+    </div>
+
+    <h2>编辑记录 {{ doc.Number }}</h2>
+
+    <form method="post">
+        <label>Title:</label><br>
+        <input type="text" name="title" value="{{ doc.Title }}" required><br><br>
+        <label>描述:</label><br>
+        <textarea name="description" required>{{ doc.Description }}</textarea><br><br>
+        <button type="submit">保存</button>
+    </form>
+</body>
+</html>
