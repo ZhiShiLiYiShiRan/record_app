@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>已录记录</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="top-bar">
+        <p>当前管理员：<strong>{{ admin }}</strong> ｜ <a href="/logout">🚪 退出</a></p>
+        <a href="{{ url_for('index') }}">返回录货</a>
+    </div>
+
+    <h2>已录记录列表</h2>
+
+    <form class="search-form" method="get">
+        <input type="text" name="q" value="{{ q }}" placeholder="搜索已录记录">
+        <button type="submit">🔍</button>
+    </form>
+
+    <ul class="record-list">
+    {% for d in docs %}
+        <li><a href="{{ url_for('edit', doc_id=d._id) }}">{{ d.Number }} - {{ d.Title }}</a></li>
+    {% else %}
+        <li>没有找到记录。</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
