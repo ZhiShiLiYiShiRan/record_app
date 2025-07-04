@@ -2,12 +2,21 @@ from flask import Flask, request, render_template, redirect, session, url_for
 from pymongo import MongoClient
 from bson import ObjectId
 from datetime import datetime
+import os
 
 app = Flask(__name__)
-app.secret_key = "super-secret-key"  # 用于启用 session
+# 从环境变量读取 Flask 会话密钥，未设置则抛出错误
+secret_key = os.getenv("FLASK_SECRET_KEY")
+if not secret_key:
+    raise RuntimeError("FLASK_SECRET_KEY environment variable not set")
+app.secret_key = secret_key
 
 # === MongoDB 设置 ===
-client = MongoClient("mongodb+srv://rrriotacc:B0SdDj36GLxIkHuZ@lizard.fyju0pz.mongodb.net/")
+# 连接字符串从环境变量读取，避免在代码中暴露凭据
+mongo_uri = os.getenv("MONGO_URI")
+if not mongo_uri:
+    raise RuntimeError("MONGO_URI environment variable not set")
+client = MongoClient(mongo_uri)
 db = client["chillmartTemp"]
 qa_collection = db["qa_bot"]
 done_collection = db["check_done"]
