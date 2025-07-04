@@ -1,7 +1,11 @@
 from pymongo import MongoClient
+import os
 
 # ===== MongoDB 连接设置 =====
-client = MongoClient("mongodb+srv://rrriotacc:B0SdDj36GLxIkHuZ@lizard.fyju0pz.mongodb.net/")
+mongo_uri = os.getenv("MONGO_URI")
+if not mongo_uri:
+    raise RuntimeError("MONGO_URI environment variable not set")
+client = MongoClient(mongo_uri)
 db = client["chillmartTemp"]
 qa_collection = db["qa_bot"]
 
